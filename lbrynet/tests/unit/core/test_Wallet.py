@@ -9,7 +9,7 @@ from twisted.trial import unittest
 from twisted.internet import threads, defer
 
 from lbrynet.core.Error import InsufficientFundsError
-from lbrynet.core.Wallet import Wallet, LBRYumWallet, ReservedPoints, InMemoryStorage
+from lbrynet.core.Wallet import Wallet, ReservedPoints
 from lbryum.commands import Commands
 
 
@@ -39,7 +39,6 @@ class MocLbryumWallet(Wallet):
         self.wallet_balance = Decimal(10.0)
         self.total_reserved_points = Decimal(0.0)
         self.queued_payments = defaultdict(Decimal)
-        self._storage = InMemoryStorage()
 
     def get_least_used_address(self, account=None, for_change=False, max_count=100):
         return defer.succeed(None)
@@ -51,12 +50,12 @@ class MocLbryumWallet(Wallet):
         return defer.succeed(True)
 
 
-class MocEncryptedWallet(LBRYumWallet):
+class MocEncryptedWallet(Wallet):
     def __init__(self):
-        LBRYumWallet.__init__(self, InMemoryStorage())
         self.wallet_balance = Decimal(10.0)
         self.total_reserved_points = Decimal(0.0)
         self.queued_payments = defaultdict(Decimal)
+
 
 class WalletTest(unittest.TestCase):
 
