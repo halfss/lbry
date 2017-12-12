@@ -5,16 +5,16 @@ def migrate_db(db_dir, start, end):
     current = start
     while current < end:
         if current == 1:
-            from lbrynet.db_migrator.migrate1to2 import do_migration
+            from lbrynet.database.migrator.migrate1to2 import do_migration
             do_migration(db_dir)
         elif current == 2:
-            from lbrynet.db_migrator.migrate2to3 import do_migration
+            from lbrynet.database.migrator.migrate2to3 import do_migration
             do_migration(db_dir)
         elif current == 3:
-            from lbrynet.db_migrator.migrate3to4 import do_migration
+            from lbrynet.database.migrator.migrate3to4 import do_migration
             do_migration(db_dir)
         elif current == 4:
-            from lbrynet.db_migrator.migrate4to5 import do_migration
+            from lbrynet.database.migrator.migrate4to5 import do_migration
             do_migration(db_dir)
         else:
             raise Exception(

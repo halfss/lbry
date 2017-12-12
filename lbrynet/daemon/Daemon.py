@@ -507,7 +507,7 @@ class Daemon(AuthJSONRPCServer):
             log.info("Finished upgrading the databases.")
 
         if old_revision < self.current_db_revision:
-            from lbrynet.db_migrator import dbmigrator
+            from lbrynet.database.migrator import dbmigrator
             log.info("Upgrading your databases")
             d = threads.deferToThread(
                 dbmigrator.migrate_db, self.db_dir, old_revision, self.current_db_revision)
